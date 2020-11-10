@@ -1,0 +1,29 @@
+server:
+  port: 8005
+
+spring:
+  application:
+    name: msa-order-api
+#  cloud:
+#    stream:
+#      bindings:
+#        order:
+#          destination: order
+#          group: product
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
+
+#    cache:
+#      type: redis
+
+#    redis:
+#      host: localhost
+#      port: 6379
+
+eureka:
+  client:
+    service-url:
+      default-zone: http

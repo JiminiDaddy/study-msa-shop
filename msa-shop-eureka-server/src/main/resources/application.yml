@@ -1,0 +1,13 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: msa-eureka-server
+
+eureka:
+  client:
+    service-url:
+      default-zone: http
+    register-with-eureka: false
+    fetch-registry: false

@@ -1,0 +1,20 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: api-gateway
+
+eureka:
+  client:
+    service-url:
+      default-zone: http
+
+zuul:
+  routes:
+    msa-order-api:
+      path: /api/v1/order/**
+    msa-product-api:
+      path: /api/v1/product/**
+    msa-member-api:
+      path: /api/v1/member/**
