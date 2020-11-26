@@ -27,7 +27,7 @@ public class MemberController {
     }
 
     @GetMapping("/api/v1/member/{id}")
-    public MemberResponseDto findMember(@PathVariable Long id) {
+    public MemberResponseDto findMember(@PathVariable(name = "id") Long id) {
         log.info("Requested, findMember. memberId:<{}>", id);
         return memberService.findMember(id);
     }

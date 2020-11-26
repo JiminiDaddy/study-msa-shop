@@ -1,7 +1,7 @@
 package com.chpark.msa.web;
 
 import com.chpark.msa.domain.Member;
-import com.chpark.msa.infra.MemberRepository;
+import com.chpark.msa.domain.MemberRepository;
 import com.chpark.msa.web.dto.MemberJoinRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;

@@ -1,7 +1,7 @@
 package com.chpark.msa.service;
 
 import com.chpark.msa.domain.Member;
-import com.chpark.msa.infra.MemberRepository;
+import com.chpark.msa.domain.MemberRepository;
 import com.chpark.msa.web.dto.MemberJoinRequestDto;
 import com.chpark.msa.web.dto.MemberResponseDto;
 import lombok.RequiredArgsConstructor;
