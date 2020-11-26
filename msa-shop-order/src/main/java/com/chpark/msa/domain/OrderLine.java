@@ -1,5 +1,6 @@
 package com.chpark.msa.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -30,13 +31,14 @@ public class OrderLine {
    // 주문목록의 가격 (상품 개수 x 상품 가격)
    private int orderPrice;
 
+   @Builder
    public OrderLine(Long productId, int price, int count) {
      this.productId = productId;
      this.count = count;
      this.orderPrice = price * count;
    }
 
-   public void cancel() {
+   void cancel() {
       count = 0;
       orderPrice = 0;
    }

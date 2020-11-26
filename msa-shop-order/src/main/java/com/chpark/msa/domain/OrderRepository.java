@@ -1,6 +1,5 @@
-package com.chpark.msa.infra;
+package com.chpark.msa.domain;
 
-import com.chpark.msa.domain.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

@@ -32,14 +32,19 @@ public class Order {
     @Enumerated(value = EnumType.STRING)
     private OrderStatus orderStatus;
 
-    public Long order(Long ordererId, OrderLine... orderLines) {
-        setOrderer(ordererId);
-        this.orderLines.addAll(Arrays.asList(orderLines));
-        changeOrderStatus(OrderStatus.ORDER);
-        return 0L;
+    @Transient
+    Orderer orderer;
+
+    public static Order createOrder(Orderer orderer, OrderLine... orderLines) {
+        Order order = new Order();
+        order.order(orderer, orderLines);
+        for (OrderLine orderLine : orderLines) {
+            order.addOrderLine(orderLine);
+        }
+        return order;
     }
 
-    public void cancel() {
+   public void cancel() {
         for (OrderLine orderLine : orderLines) {
             orderLine.cancel();
         }
@@ -54,11 +59,23 @@ public class Order {
         return price;
     }
 
-    private void setOrderer(Long ordererId) {
-        this.ordererId = ordererId;
+    private Long order(Orderer orderer, OrderLine... orderLines) {
+        setOrderer(orderer);
+        this.orderLines.addAll(Arrays.asList(orderLines));
+        changeOrderStatus(OrderStatus.ORDER);
+        return 0L;
+    }
+
+    private void setOrderer(Orderer orderer) {
+        this.ordererId = orderer.getId();
+        this.orderer = orderer;
     }
 
     private void changeOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    private void addOrderLine(OrderLine orderLine) {
+        this.orderLines.add(orderLine);
     }
 }
