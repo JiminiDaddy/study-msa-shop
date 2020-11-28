@@ -4,25 +4,22 @@ import com.chpark.msa.api.MemberClient;
 import com.chpark.msa.api.ProductClient;
 import com.chpark.msa.api.dto.MemberResponseDto;
 import com.chpark.msa.api.dto.ProductResponseDto;
-import com.chpark.msa.domain.*;
+import com.chpark.msa.domain.Order;
+import com.chpark.msa.domain.OrderLine;
+import com.chpark.msa.domain.OrderRepository;
+import com.chpark.msa.domain.Orderer;
 import com.chpark.msa.web.dto.OrderCreateResponseDto;
 import com.chpark.msa.web.dto.OrderRequestDto;
-import com.netflix.discovery.converters.Auto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by Choen-hee Park
