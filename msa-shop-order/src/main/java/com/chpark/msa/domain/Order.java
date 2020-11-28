@@ -61,7 +61,6 @@ public class Order {
 
     private Long order(Orderer orderer, OrderLine... orderLines) {
         setOrderer(orderer);
-        this.orderLines.addAll(Arrays.asList(orderLines));
         changeOrderStatus(OrderStatus.ORDER);
         return 0L;
     }

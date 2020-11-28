@@ -1,7 +1,9 @@
 package com.chpark.msa.service;
 
 import com.chpark.msa.api.MemberClient;
+import com.chpark.msa.api.ProductClient;
 import com.chpark.msa.api.dto.MemberResponseDto;
+import com.chpark.msa.api.dto.ProductResponseDto;
 import com.chpark.msa.domain.*;
 import com.chpark.msa.web.dto.OrderRequestDto;
 import com.chpark.msa.web.dto.OrderCreateResponseDto;
@@ -23,6 +25,8 @@ public class OrderService {
 
     private final MemberClient memberClient;
 
+    private final ProductClient productClient;
+
     @Transactional
     public String hello() {
         return "Hello";
@@ -43,12 +47,11 @@ public class OrderService {
                 .name(memberResponseDto.getMemberName())
                 .build();
 
-        // TODO product는 Product-API로부터 받아와야한다. 현재 임의로 테스트
-        Product product = Product.builder().productId(requestDto.getProductId()).count(1).price(10000).build();
+        ProductResponseDto productResponseDto = productClient.find(requestDto.getProductId());
         OrderLine orderLine = OrderLine.builder()
-                .productId(product.getProductId())
-                .count(product.getCount())
-                .price(product.getPrice()).build();
+                .productId(productResponseDto.getId())
+                .count(productResponseDto.getCount())
+                .price(productResponseDto.getPrice()).build();
 
         Order order = Order.createOrder(orderer, orderLine);
 
