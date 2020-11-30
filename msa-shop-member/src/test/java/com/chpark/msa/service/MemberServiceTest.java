@@ -31,7 +31,6 @@ class MemberServiceTest {
     void 회원가입() {
         String memberName = "Chpark";
         MemberJoinRequestDto requestDto = new MemberJoinRequestDto(memberName);
-        Member member = requestDto.toEntity();
 
         MemberResponseDto responseDto = memberService.joinMember(requestDto);
         Assertions.assertEquals("Chpark", responseDto.getMemberName());
