@@ -1,6 +1,7 @@
 package com.chpark.msa.web.dto;
 
 import com.chpark.msa.domain.Product;
+import com.chpark.msa.domain.ResultCode;
 import lombok.Getter;
 
 /**
@@ -11,13 +12,14 @@ import lombok.Getter;
  */
 
 @Getter
-public class ProductResponseDto {
+public class ProductResponseDto extends ResultCodeResponseDto{
     private Long id;
     private String name;
     private int price;
     private int stockQuantity;
 
     public ProductResponseDto(Product entity) {
+        super(ResultCode.SUCCESS);
         this.id = entity.getId();
         this.name = entity.getName();
         this.price = entity.getPrice();

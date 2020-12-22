@@ -7,6 +7,7 @@ import com.chpark.msa.api.dto.ProductResponseDto;
 import com.chpark.msa.domain.*;
 import com.chpark.msa.web.dto.OrderRequestDto;
 import com.chpark.msa.web.dto.OrderCreateResponseDto;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,7 +48,11 @@ public class OrderService {
                 .name(memberResponseDto.getMemberName())
                 .build();
 
+        /*
         ProductResponseDto productResponseDto = productClient.find(requestDto.getProductId());
+        */
+        // TODO 위에 Client로 구현해야함
+        ProductResponseDto productResponseDto = ProductResponseDto.builder().id(requestDto.getProductId()).name("product1").price(5000).count(1).build();
         OrderLine orderLine = OrderLine.builder()
                 .productId(productResponseDto.getId())
                 .count(productResponseDto.getCount())

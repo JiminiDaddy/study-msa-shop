@@ -3,6 +3,7 @@ package com.chpark.msa.domain;
 import com.chpark.msa.exception.NotEnoughStockException;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -13,6 +14,7 @@ import javax.persistence.*;
  * Time : 2:13 AM
  */
 
+@NoArgsConstructor
 @Getter
 @Entity
 @Table(name = "Products")

@@ -2,12 +2,17 @@ package com.chpark.msa.service;
 
 import com.chpark.msa.domain.Product;
 import com.chpark.msa.domain.ProductRepository;
+import com.chpark.msa.domain.ResultCode;
+import com.chpark.msa.exception.WrongProductIdException;
 import com.chpark.msa.web.dto.ProductRegistRequestDto;
 import com.chpark.msa.web.dto.ProductResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Choen-hee Park
@@ -28,5 +33,21 @@ public class ProductService {
         // TODO 카테고리 등록하여 상품 구분필요
         Product product = productRepository.save(requestDto.toEntity());
         return new ProductResponseDto(product);
+    }
+
+    @Transactional
+    public ProductResponseDto find(Long productId) {
+        return new ProductResponseDto(findById(productId));
+    }
+
+    @Transactional
+    public List<ProductResponseDto> findAll() {
+        List<Product> products = productRepository.findAll();
+        return products.stream().map(ProductResponseDto::new).collect(Collectors.toList());
+    }
+
+    private Product findById(Long productId) {
+         return productRepository.findById(productId).orElseThrow(
+                () -> new WrongProductIdException("Wrong productId: <" + productId + ">"));
     }
 }
