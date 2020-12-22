@@ -45,17 +45,6 @@ class OrderControllerTest {
     private static final String SERVER_URL = "http://localhost:8005/api/v1/order";
 
     @Test
-    void 헬로_테스트() throws Exception {
-        when(orderService.hello()).thenReturn("hellossss");
-
-        final ResultActions actions = mvc.perform(get("http://localhost:8005/hello")
-                .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk());
-
-        actions.andExpect(content().string(containsString("Hello")));
-    }
-
-    @Test
     void 주문_생성_테스트() throws Exception {
         Long orderId = 1001L;
         Long productId = 5001L;

@@ -43,8 +43,8 @@ class OrderServiceTest {
         Long ordererId = 1001L;
         String ordererName = "Test-User";
         Long productId = 5001L;
-        int productCount = 30;
-        int productPrice = 1000;
+        int productCount = 1;
+        int productPrice = 5000;
         given(memberClient.find(ordererId)).willReturn(MemberResponseDto.builder().memberId(ordererId).memberName(ordererName).build());
         given(productClient.find(productId)).willReturn((ProductResponseDto.builder().name("Book").count(productCount).price(productPrice).build()));
         OrderRequestDto requestDto = OrderRequestDto.builder().ordererId(ordererId).productId(productId).build();
