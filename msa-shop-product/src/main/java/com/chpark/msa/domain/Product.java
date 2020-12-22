@@ -1,5 +1,7 @@
 package com.chpark.msa.domain;
 
+import com.chpark.msa.exception.NotEnoughStockException;
+import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -21,7 +23,25 @@ public class Product {
     @Column(nullable = false)
     private String name;
 
-    private int stock;
+    private int stockQuantity;
 
     private int price;
+
+    @Builder
+    Product(String name, int price, int stockQuantity) {
+        this.name = name;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
+    }
+
+    public void addStock(int stockQuantity) {
+        this.stockQuantity += stockQuantity;
+    }
+
+    public void removeStock(int stockQuantity) {
+        if (stockQuantity > this.stockQuantity) {
+            throw new NotEnoughStockException("Need more stock");
+        }
+        this.stockQuantity -= stockQuantity;
+    }
 }
