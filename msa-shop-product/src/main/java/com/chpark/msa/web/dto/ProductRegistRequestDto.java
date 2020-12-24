@@ -12,15 +12,13 @@ import lombok.NoArgsConstructor;
  * Time : 4:57 PM
  */
 
-@NoArgsConstructor
 @Getter
 public class ProductRegistRequestDto {
     private String name;
     private int price;
     private int quantity;
 
-    @Builder
-    ProductRegistRequestDto(String name, int price, int quantity) {
+    public ProductRegistRequestDto(String name, int price, int quantity) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;

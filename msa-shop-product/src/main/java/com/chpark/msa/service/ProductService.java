@@ -6,6 +6,8 @@ import com.chpark.msa.domain.ResultCode;
 import com.chpark.msa.exception.WrongProductIdException;
 import com.chpark.msa.web.dto.ProductRegistRequestDto;
 import com.chpark.msa.web.dto.ProductResponseDto;
+import com.chpark.msa.web.dto.ProductStockAddRequestDto;
+import com.chpark.msa.web.dto.ProductStockRemoveRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -44,6 +46,20 @@ public class ProductService {
     public List<ProductResponseDto> findAll() {
         List<Product> products = productRepository.findAll();
         return products.stream().map(ProductResponseDto::new).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public ProductResponseDto addStock(ProductStockAddRequestDto requestDto)  {
+        Product product = findById(requestDto.getId());
+        product.addStock(requestDto.getQuantity());
+        return new ProductResponseDto(productRepository.save(product));
+    }
+
+    @Transactional
+    public ProductResponseDto removeStock(ProductStockRemoveRequestDto requestDto) {
+       Product product = findById(requestDto.getId());
+       product.removeStock(requestDto.getQuantity());
+       return new ProductResponseDto(productRepository.save(product));
     }
 
     private Product findById(Long productId) {
